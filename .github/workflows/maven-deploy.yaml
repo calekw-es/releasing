@@ -1,0 +1,26 @@
+name: Maven Deploy
+on:
+  release:
+    types:
+      - created
+    workflow_dispatch:
+jobs:
+  maven-deploy:
+    name: Maven Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Maven Deploy to GitHub Packages
+        run: mvn --batch-mode deploy
+        working-directory: releasing-demo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

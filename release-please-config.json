@@ -1,0 +1,8 @@
+{
+    "packages": {
+        "releasing-demo": {
+            "release-type": "maven",
+            "component": "releasing-demo"
+        }
+    }
+}
